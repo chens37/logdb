@@ -1,0 +1,24 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/shichen/workspace/opensource/log/logdb/src/log.cpp
+log.h
+/home/shichen/workspace/opensource/log/logdb/src/log.h
+unistd.h
+-
+time.h
+-
+string
+-
+
+/home/shichen/workspace/opensource/log/logdb/src/log.h
+iostream
+-
+time.h
+-
+

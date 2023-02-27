@@ -1,0 +1,6 @@
+/home/shichen/workspace/opensource/log/logdb/build/CMakeFiles/rebuild_cache.dir
+/home/shichen/workspace/opensource/log/logdb/build/CMakeFiles/edit_cache.dir
+/home/shichen/workspace/opensource/log/logdb/build/CMakeFiles/logdbtest.dir
+/home/shichen/workspace/opensource/log/logdb/build/src/CMakeFiles/rebuild_cache.dir
+/home/shichen/workspace/opensource/log/logdb/build/src/CMakeFiles/edit_cache.dir
+/home/shichen/workspace/opensource/log/logdb/build/src/CMakeFiles/logdb.dir
