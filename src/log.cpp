@@ -18,12 +18,23 @@ void Logger::forcedLog(LogLevel ll, string str,
             const char *file, int line, const char *func)
 {
     // TODO
+    LoggingEvent_t *ev = new LoggingEvent_t();
+
+    ev->func = func;
+    ev->file = file;
+    ev->line = line;
+    ev->ll = ll;
+    ev->msg = str;
+
+    callAppend(ev);
+
 }
 
 Logger::~Logger(){
 
 }
 Logger::Logger()
+:loglevel(INFO)
 {
 }
 
@@ -53,45 +64,6 @@ void Logger::destroyInstance()
         delete m_pLoggerInstance;
         m_pLoggerInstance = nullptr;
     }
-}
-
-string Logger::level2str(const LogLevel levl)
-{
-    switch(levl){
-    case DEBUG:
-        return "DEBUG";
-    case TRACE:
-        return "TRACE";
-    case INFO:
-        return "INFO";
-    case WARNING:
-        return "WARNING";
-    case ERROR:
-        return "ERROR";
-    default:
-        return "INFO";
-    }
-}
-
-FmtMsg_t Logger::Format(LogMsg_t& msg)
-{
-    time_t t = time(NULL);
-    FmtMsg_t outmsg;
-    string space = " ";
-    
-    string timestamp = ctime(&t);
-    size_t pos = timestamp.find('\n');
-    if(pos != std::string::npos) {
-        timestamp.erase(pos, 1);
-    }
-
-    outmsg.msg = space + timestamp +
-    		  space + std::__cxx11::to_string(Pid) + 
-                   space + ModuleName +
-		   space + level2str(msg.level) +
-		   space + msg.msgline;
-
-    return outmsg;
 }
 
 
@@ -131,9 +103,12 @@ void Logger::removeAppender(string& name)
 }
 
 
-void Logger::callAppend()
+void Logger::callAppend(LoggingEvent_t *ev)
 {
     //TODO
+    for ( AppenderPtr& ptr : appenderList ) {
+        ptr->doAppend(ev);
+    }
 }
 
 }//namespace logdb

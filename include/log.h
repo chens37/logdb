@@ -7,14 +7,7 @@
 #include <time.h>
 #include "config.h"
 #include "appender.h"
-
-enum LogLevel{
-    DEBUG = 0,
-    TRACE,
-    INFO,
-    WARNING,
-    ERROR,
-};
+#include "loggingevent.h"
 
 #define DEFAULT_LEVEL	INFO
 
@@ -29,13 +22,6 @@ class Appender;
         LogLevel level;
     }LogMsg_t;
 
-    typedef struct FmtMsg {
-        string msg;
-    }FmtMsg_t;
-
-    typedef struct TimeStamp {
-        time_t time;
-    }TimeStamp_t;
 
     class Filter;
 
@@ -67,7 +53,7 @@ class Appender;
         void removeAppender(AppenderPtr appender);
         void removeAppender(string& name);
         AppenderPtr getAppender(string& name);
-        void callAppend();
+        void callAppend(LoggingEvent_t *ev);
         /**
          * The user interface to stream log message
          * 
@@ -84,6 +70,7 @@ class Appender;
             const char *func = LOGDB_CALLER_FUNCTION()
             );
         LogLevel getLogLevel() {return this->loglevel;}
+        void setLogLevel(LogLevel ll) { this->loglevel = ll; }
 
     private:
         Logger();
@@ -94,15 +81,12 @@ class Appender;
          * which can only be called by GetInstance()
          */
 	    static Logger* createInstance();
-        FmtMsg_t Format(LogMsg_t& msg);
-	    string level2str(const LogLevel levl);
         bool isEnabledfor(LogLevel ll);
 
         static Logger *m_pLoggerInstance;
         
         std::vector<AppenderPtr> appenderList;
         LogLevel loglevel;
-	    TimeStamp_t ts;
 	    int Pid;
 	    string ModuleName;
     };

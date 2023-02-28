@@ -4,17 +4,15 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/shichen/workspace/opensource/log/logdb/src/log.cpp" "/home/shichen/workspace/opensource/log/logdb/build/src/CMakeFiles/logdb.dir/log.cpp.o"
+  "/home/shichen/ssd/opensource/logdb/src/appender.cpp" "/home/shichen/ssd/opensource/logdb/build/src/CMakeFiles/logdb.dir/appender.cpp.o"
+  "/home/shichen/ssd/opensource/logdb/src/layout.cpp" "/home/shichen/ssd/opensource/logdb/build/src/CMakeFiles/logdb.dir/layout.cpp.o"
+  "/home/shichen/ssd/opensource/logdb/src/log.cpp" "/home/shichen/ssd/opensource/logdb/build/src/CMakeFiles/logdb.dir/log.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
-# Preprocessor definitions for this target.
-set(CMAKE_TARGET_DEFINITIONS_CXX
-  "logdb_EXPORTS"
-  )
-
 # The include file search paths:
 set(CMAKE_CXX_TARGET_INCLUDE_PATH
+  "../include"
   )
 
 # Targets to which this target links.

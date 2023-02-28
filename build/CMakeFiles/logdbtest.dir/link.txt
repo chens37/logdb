@@ -1,1 +1,1 @@
-/usr/bin/c++     CMakeFiles/logdbtest.dir/testlogdb.cpp.o  -o logdbtest  -Wl,-rpath,/home/shichen/workspace/opensource/log/logdb/build/src src/liblogdb.so 
+/usr/bin/c++  -g   CMakeFiles/logdbtest.dir/testlogdb.cpp.o  -o logdbtest -Wl,-rpath,/home/shichen/ssd/opensource/logdb/build/src src/liblogdb.so 

@@ -1,4 +1,4 @@
-# Install script for directory: /home/shichen/workspace/opensource/log/logdb
+# Install script for directory: /home/shichen/ssd/opensource/logdb
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -38,8 +38,9 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
-  # Include the install script for the subdirectory.
-  include("/home/shichen/workspace/opensource/log/logdb/build/src/cmake_install.cmake")
+  # Include the install script for each subdirectory.
+  include("/home/shichen/ssd/opensource/logdb/build/src/cmake_install.cmake")
+
 endif()
 
 if(CMAKE_INSTALL_COMPONENT)
@@ -50,5 +51,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/shichen/workspace/opensource/log/logdb/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/shichen/ssd/opensource/logdb/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

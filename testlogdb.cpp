@@ -1,18 +1,23 @@
 #include <iostream>
 
 #include "log.h"
+#include "layout.h"
 
 using namespace logdb;
 
 int main(int argc, char** argv)
 {
-    Logbase *pLogger = Logbase::CreateInstance();
+    Logger *pLogger = Logger::getInstance();
 
-    pLogger->Init("TestModule");
+    pLogger->addAppender(new ConsoleAppender);
 
-    pLogger->print(std::cout, INFO,"hello world");
-    pLogger->print(std::cout, DEBUG,"hello world");
-    pLogger->print(std::cout, ERROR,"hello world");
+    pLogger->log(INFO, "hello world");
+    pLogger->log(DEBUG, "hello world");
+    pLogger->log(ERROR, "hello world");
+
+    pLogger->setLogLevel(DEBUG);
+    pLogger->log(DEBUG, "hello world");
+
 
     return 0;
 }
