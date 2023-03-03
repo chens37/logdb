@@ -1,7 +1,9 @@
 file(REMOVE_RECURSE
   "CMakeFiles/logdb.dir/appender.cpp.o"
+  "CMakeFiles/logdb.dir/helper.cpp.o"
   "CMakeFiles/logdb.dir/layout.cpp.o"
   "CMakeFiles/logdb.dir/log.cpp.o"
+  "CMakeFiles/logdb.dir/loggingevent.cpp.o"
   "liblogdb.pdb"
   "liblogdb.so"
 )

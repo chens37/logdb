@@ -5,8 +5,10 @@ set(CMAKE_DEPENDS_LANGUAGES
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
   "/home/shichen/ssd/opensource/logdb/src/appender.cpp" "/home/shichen/ssd/opensource/logdb/build/src/CMakeFiles/logdb.dir/appender.cpp.o"
+  "/home/shichen/ssd/opensource/logdb/src/helper.cpp" "/home/shichen/ssd/opensource/logdb/build/src/CMakeFiles/logdb.dir/helper.cpp.o"
   "/home/shichen/ssd/opensource/logdb/src/layout.cpp" "/home/shichen/ssd/opensource/logdb/build/src/CMakeFiles/logdb.dir/layout.cpp.o"
   "/home/shichen/ssd/opensource/logdb/src/log.cpp" "/home/shichen/ssd/opensource/logdb/build/src/CMakeFiles/logdb.dir/log.cpp.o"
+  "/home/shichen/ssd/opensource/logdb/src/loggingevent.cpp" "/home/shichen/ssd/opensource/logdb/build/src/CMakeFiles/logdb.dir/loggingevent.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

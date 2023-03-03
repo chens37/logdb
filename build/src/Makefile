@@ -152,6 +152,33 @@ appender.cpp.s:
 	cd /home/shichen/ssd/opensource/logdb/build && $(MAKE) -f src/CMakeFiles/logdb.dir/build.make src/CMakeFiles/logdb.dir/appender.cpp.s
 .PHONY : appender.cpp.s
 
+helper.o: helper.cpp.o
+
+.PHONY : helper.o
+
+# target to build an object file
+helper.cpp.o:
+	cd /home/shichen/ssd/opensource/logdb/build && $(MAKE) -f src/CMakeFiles/logdb.dir/build.make src/CMakeFiles/logdb.dir/helper.cpp.o
+.PHONY : helper.cpp.o
+
+helper.i: helper.cpp.i
+
+.PHONY : helper.i
+
+# target to preprocess a source file
+helper.cpp.i:
+	cd /home/shichen/ssd/opensource/logdb/build && $(MAKE) -f src/CMakeFiles/logdb.dir/build.make src/CMakeFiles/logdb.dir/helper.cpp.i
+.PHONY : helper.cpp.i
+
+helper.s: helper.cpp.s
+
+.PHONY : helper.s
+
+# target to generate assembly for a file
+helper.cpp.s:
+	cd /home/shichen/ssd/opensource/logdb/build && $(MAKE) -f src/CMakeFiles/logdb.dir/build.make src/CMakeFiles/logdb.dir/helper.cpp.s
+.PHONY : helper.cpp.s
+
 layout.o: layout.cpp.o
 
 .PHONY : layout.o
@@ -206,6 +233,33 @@ log.cpp.s:
 	cd /home/shichen/ssd/opensource/logdb/build && $(MAKE) -f src/CMakeFiles/logdb.dir/build.make src/CMakeFiles/logdb.dir/log.cpp.s
 .PHONY : log.cpp.s
 
+loggingevent.o: loggingevent.cpp.o
+
+.PHONY : loggingevent.o
+
+# target to build an object file
+loggingevent.cpp.o:
+	cd /home/shichen/ssd/opensource/logdb/build && $(MAKE) -f src/CMakeFiles/logdb.dir/build.make src/CMakeFiles/logdb.dir/loggingevent.cpp.o
+.PHONY : loggingevent.cpp.o
+
+loggingevent.i: loggingevent.cpp.i
+
+.PHONY : loggingevent.i
+
+# target to preprocess a source file
+loggingevent.cpp.i:
+	cd /home/shichen/ssd/opensource/logdb/build && $(MAKE) -f src/CMakeFiles/logdb.dir/build.make src/CMakeFiles/logdb.dir/loggingevent.cpp.i
+.PHONY : loggingevent.cpp.i
+
+loggingevent.s: loggingevent.cpp.s
+
+.PHONY : loggingevent.s
+
+# target to generate assembly for a file
+loggingevent.cpp.s:
+	cd /home/shichen/ssd/opensource/logdb/build && $(MAKE) -f src/CMakeFiles/logdb.dir/build.make src/CMakeFiles/logdb.dir/loggingevent.cpp.s
+.PHONY : loggingevent.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -218,12 +272,18 @@ help:
 	@echo "... appender.o"
 	@echo "... appender.i"
 	@echo "... appender.s"
+	@echo "... helper.o"
+	@echo "... helper.i"
+	@echo "... helper.s"
 	@echo "... layout.o"
 	@echo "... layout.i"
 	@echo "... layout.s"
 	@echo "... log.o"
 	@echo "... log.i"
 	@echo "... log.s"
+	@echo "... loggingevent.o"
+	@echo "... loggingevent.i"
+	@echo "... loggingevent.s"
 .PHONY : help
 
 

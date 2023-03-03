@@ -1,6 +1,10 @@
 #ifndef LOGGING_EVENT_H
 #define LOGGING_EVENT_H
 
+#include <string>
+#include <vector>
+#include <ctime>
+#define MAX_EV_NUM 256
 
 namespace logdb {
 
@@ -12,9 +16,12 @@ enum LogLevel{
     INFO,
     WARNING,
     ERROR,
+    DEFAULT,
 };
 
-typedef string TimeStamp_t;
+typedef time_t TimeStamp_t;
+
+class InternalEventManager;
 
 typedef struct LoggingEvent {
     /* data */
@@ -23,8 +30,30 @@ typedef struct LoggingEvent {
     string file;
     int line;
     string func;
-    TimeStamp_t time;
+    TimeStamp_t rawtime;
+    InternalEventManager *manager;
+    bool inuse;
 } LoggingEvent_t;
+
+typedef LoggingEvent_t* LoggingEventPtr;
+
+class InternalEventManager
+{
+public:
+    static void doClearEv(LoggingEventPtr ev);
+    InternalEventManager();
+    ~InternalEventManager();
+    LoggingEventPtr getEmptyEv(bool alloc);
+    void putEv(LoggingEventPtr);
+    /*
+    * won't clear manager member
+    */
+    void clearEv(LoggingEventPtr);
+private:
+    LoggingEventPtr allocEv();
+    std::vector<LoggingEventPtr> evList;
+    int evNumMax;
+};
 
 }
 

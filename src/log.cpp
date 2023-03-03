@@ -18,8 +18,7 @@ void Logger::forcedLog(LogLevel ll, string str,
             const char *file, int line, const char *func)
 {
     // TODO
-    LoggingEvent_t *ev = new LoggingEvent_t();
-
+    LoggingEvent_t *ev = evManager->getEmptyEv(true);
     ev->func = func;
     ev->file = file;
     ev->line = line;
@@ -34,7 +33,7 @@ Logger::~Logger(){
 
 }
 Logger::Logger()
-:loglevel(INFO)
+:loglevel(INFO),evManager(new InternalEventManager)
 {
 }
 

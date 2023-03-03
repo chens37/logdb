@@ -11,6 +11,11 @@
 },
 {
   "directory": "/home/shichen/ssd/opensource/logdb/build/src",
+  "command": "/usr/bin/c++  -Dlogdb_EXPORTS -I/home/shichen/ssd/opensource/logdb/include  -g -fPIC   -o CMakeFiles/logdb.dir/helper.cpp.o -c /home/shichen/ssd/opensource/logdb/src/helper.cpp",
+  "file": "/home/shichen/ssd/opensource/logdb/src/helper.cpp"
+},
+{
+  "directory": "/home/shichen/ssd/opensource/logdb/build/src",
   "command": "/usr/bin/c++  -Dlogdb_EXPORTS -I/home/shichen/ssd/opensource/logdb/include  -g -fPIC   -o CMakeFiles/logdb.dir/layout.cpp.o -c /home/shichen/ssd/opensource/logdb/src/layout.cpp",
   "file": "/home/shichen/ssd/opensource/logdb/src/layout.cpp"
 },
@@ -18,5 +23,10 @@
   "directory": "/home/shichen/ssd/opensource/logdb/build/src",
   "command": "/usr/bin/c++  -Dlogdb_EXPORTS -I/home/shichen/ssd/opensource/logdb/include  -g -fPIC   -o CMakeFiles/logdb.dir/log.cpp.o -c /home/shichen/ssd/opensource/logdb/src/log.cpp",
   "file": "/home/shichen/ssd/opensource/logdb/src/log.cpp"
+},
+{
+  "directory": "/home/shichen/ssd/opensource/logdb/build/src",
+  "command": "/usr/bin/c++  -Dlogdb_EXPORTS -I/home/shichen/ssd/opensource/logdb/include  -g -fPIC   -o CMakeFiles/logdb.dir/loggingevent.cpp.o -c /home/shichen/ssd/opensource/logdb/src/loggingevent.cpp",
+  "file": "/home/shichen/ssd/opensource/logdb/src/loggingevent.cpp"
 }
 ]

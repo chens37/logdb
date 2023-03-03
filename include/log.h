@@ -86,6 +86,7 @@ class Appender;
         static Logger *m_pLoggerInstance;
         
         std::vector<AppenderPtr> appenderList;
+        InternalEventManager *evManager;
         LogLevel loglevel;
 	    int Pid;
 	    string ModuleName;

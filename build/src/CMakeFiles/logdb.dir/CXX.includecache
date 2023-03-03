@@ -16,8 +16,18 @@ loggingevent.h
 
 ../include/config.h
 
+../include/helper.h
+string
+-
+
 ../include/layout.h
 string
+-
+vector
+-
+memory
+-
+ctime
 -
 loggingevent.h
 ../include/loggingevent.h
@@ -37,6 +47,12 @@ loggingevent.h
 ../include/loggingevent.h
 
 ../include/loggingevent.h
+string
+-
+vector
+-
+ctime
+-
 
 /home/shichen/ssd/opensource/logdb/src/appender.cpp
 iostream
@@ -50,11 +66,21 @@ appender.h
 loggingevent.h
 /home/shichen/ssd/opensource/logdb/src/loggingevent.h
 
+/home/shichen/ssd/opensource/logdb/src/helper.cpp
+ctime
+-
+string
+-
+helper.h
+/home/shichen/ssd/opensource/logdb/src/helper.h
+
 /home/shichen/ssd/opensource/logdb/src/layout.cpp
 iostream
 -
 layout.h
 /home/shichen/ssd/opensource/logdb/src/layout.h
+helper.h
+/home/shichen/ssd/opensource/logdb/src/helper.h
 
 /home/shichen/ssd/opensource/logdb/src/log.cpp
 log.h
@@ -67,4 +93,8 @@ string
 -
 algorithm
 -
+
+/home/shichen/ssd/opensource/logdb/src/loggingevent.cpp
+loggingevent.h
+/home/shichen/ssd/opensource/logdb/src/loggingevent.h
 

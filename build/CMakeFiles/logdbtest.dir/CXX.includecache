@@ -19,6 +19,12 @@ loggingevent.h
 ../include/layout.h
 string
 -
+vector
+-
+memory
+-
+ctime
+-
 loggingevent.h
 ../include/loggingevent.h
 
@@ -37,6 +43,12 @@ loggingevent.h
 ../include/loggingevent.h
 
 ../include/loggingevent.h
+string
+-
+vector
+-
+ctime
+-
 
 /home/shichen/ssd/opensource/logdb/testlogdb.cpp
 iostream

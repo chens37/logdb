@@ -81,9 +81,33 @@ src/CMakeFiles/logdb.dir/appender.cpp.o.provides: src/CMakeFiles/logdb.dir/appen
 src/CMakeFiles/logdb.dir/appender.cpp.o.provides.build: src/CMakeFiles/logdb.dir/appender.cpp.o
 
 
+src/CMakeFiles/logdb.dir/helper.cpp.o: src/CMakeFiles/logdb.dir/flags.make
+src/CMakeFiles/logdb.dir/helper.cpp.o: ../src/helper.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/shichen/ssd/opensource/logdb/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/CMakeFiles/logdb.dir/helper.cpp.o"
+	cd /home/shichen/ssd/opensource/logdb/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/logdb.dir/helper.cpp.o -c /home/shichen/ssd/opensource/logdb/src/helper.cpp
+
+src/CMakeFiles/logdb.dir/helper.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/logdb.dir/helper.cpp.i"
+	cd /home/shichen/ssd/opensource/logdb/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/shichen/ssd/opensource/logdb/src/helper.cpp > CMakeFiles/logdb.dir/helper.cpp.i
+
+src/CMakeFiles/logdb.dir/helper.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/logdb.dir/helper.cpp.s"
+	cd /home/shichen/ssd/opensource/logdb/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/shichen/ssd/opensource/logdb/src/helper.cpp -o CMakeFiles/logdb.dir/helper.cpp.s
+
+src/CMakeFiles/logdb.dir/helper.cpp.o.requires:
+
+.PHONY : src/CMakeFiles/logdb.dir/helper.cpp.o.requires
+
+src/CMakeFiles/logdb.dir/helper.cpp.o.provides: src/CMakeFiles/logdb.dir/helper.cpp.o.requires
+	$(MAKE) -f src/CMakeFiles/logdb.dir/build.make src/CMakeFiles/logdb.dir/helper.cpp.o.provides.build
+.PHONY : src/CMakeFiles/logdb.dir/helper.cpp.o.provides
+
+src/CMakeFiles/logdb.dir/helper.cpp.o.provides.build: src/CMakeFiles/logdb.dir/helper.cpp.o
+
+
 src/CMakeFiles/logdb.dir/layout.cpp.o: src/CMakeFiles/logdb.dir/flags.make
 src/CMakeFiles/logdb.dir/layout.cpp.o: ../src/layout.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/shichen/ssd/opensource/logdb/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object src/CMakeFiles/logdb.dir/layout.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/shichen/ssd/opensource/logdb/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object src/CMakeFiles/logdb.dir/layout.cpp.o"
 	cd /home/shichen/ssd/opensource/logdb/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/logdb.dir/layout.cpp.o -c /home/shichen/ssd/opensource/logdb/src/layout.cpp
 
 src/CMakeFiles/logdb.dir/layout.cpp.i: cmake_force
@@ -107,7 +131,7 @@ src/CMakeFiles/logdb.dir/layout.cpp.o.provides.build: src/CMakeFiles/logdb.dir/l
 
 src/CMakeFiles/logdb.dir/log.cpp.o: src/CMakeFiles/logdb.dir/flags.make
 src/CMakeFiles/logdb.dir/log.cpp.o: ../src/log.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/shichen/ssd/opensource/logdb/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object src/CMakeFiles/logdb.dir/log.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/shichen/ssd/opensource/logdb/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object src/CMakeFiles/logdb.dir/log.cpp.o"
 	cd /home/shichen/ssd/opensource/logdb/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/logdb.dir/log.cpp.o -c /home/shichen/ssd/opensource/logdb/src/log.cpp
 
 src/CMakeFiles/logdb.dir/log.cpp.i: cmake_force
@@ -129,21 +153,49 @@ src/CMakeFiles/logdb.dir/log.cpp.o.provides: src/CMakeFiles/logdb.dir/log.cpp.o.
 src/CMakeFiles/logdb.dir/log.cpp.o.provides.build: src/CMakeFiles/logdb.dir/log.cpp.o
 
 
+src/CMakeFiles/logdb.dir/loggingevent.cpp.o: src/CMakeFiles/logdb.dir/flags.make
+src/CMakeFiles/logdb.dir/loggingevent.cpp.o: ../src/loggingevent.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/shichen/ssd/opensource/logdb/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object src/CMakeFiles/logdb.dir/loggingevent.cpp.o"
+	cd /home/shichen/ssd/opensource/logdb/build/src && /usr/bin/c++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/logdb.dir/loggingevent.cpp.o -c /home/shichen/ssd/opensource/logdb/src/loggingevent.cpp
+
+src/CMakeFiles/logdb.dir/loggingevent.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/logdb.dir/loggingevent.cpp.i"
+	cd /home/shichen/ssd/opensource/logdb/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/shichen/ssd/opensource/logdb/src/loggingevent.cpp > CMakeFiles/logdb.dir/loggingevent.cpp.i
+
+src/CMakeFiles/logdb.dir/loggingevent.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/logdb.dir/loggingevent.cpp.s"
+	cd /home/shichen/ssd/opensource/logdb/build/src && /usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/shichen/ssd/opensource/logdb/src/loggingevent.cpp -o CMakeFiles/logdb.dir/loggingevent.cpp.s
+
+src/CMakeFiles/logdb.dir/loggingevent.cpp.o.requires:
+
+.PHONY : src/CMakeFiles/logdb.dir/loggingevent.cpp.o.requires
+
+src/CMakeFiles/logdb.dir/loggingevent.cpp.o.provides: src/CMakeFiles/logdb.dir/loggingevent.cpp.o.requires
+	$(MAKE) -f src/CMakeFiles/logdb.dir/build.make src/CMakeFiles/logdb.dir/loggingevent.cpp.o.provides.build
+.PHONY : src/CMakeFiles/logdb.dir/loggingevent.cpp.o.provides
+
+src/CMakeFiles/logdb.dir/loggingevent.cpp.o.provides.build: src/CMakeFiles/logdb.dir/loggingevent.cpp.o
+
+
 # Object files for target logdb
 logdb_OBJECTS = \
 "CMakeFiles/logdb.dir/appender.cpp.o" \
+"CMakeFiles/logdb.dir/helper.cpp.o" \
 "CMakeFiles/logdb.dir/layout.cpp.o" \
-"CMakeFiles/logdb.dir/log.cpp.o"
+"CMakeFiles/logdb.dir/log.cpp.o" \
+"CMakeFiles/logdb.dir/loggingevent.cpp.o"
 
 # External object files for target logdb
 logdb_EXTERNAL_OBJECTS =
 
 src/liblogdb.so: src/CMakeFiles/logdb.dir/appender.cpp.o
+src/liblogdb.so: src/CMakeFiles/logdb.dir/helper.cpp.o
 src/liblogdb.so: src/CMakeFiles/logdb.dir/layout.cpp.o
 src/liblogdb.so: src/CMakeFiles/logdb.dir/log.cpp.o
+src/liblogdb.so: src/CMakeFiles/logdb.dir/loggingevent.cpp.o
 src/liblogdb.so: src/CMakeFiles/logdb.dir/build.make
 src/liblogdb.so: src/CMakeFiles/logdb.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/shichen/ssd/opensource/logdb/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX shared library liblogdb.so"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/shichen/ssd/opensource/logdb/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Linking CXX shared library liblogdb.so"
 	cd /home/shichen/ssd/opensource/logdb/build/src && $(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/logdb.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -152,8 +204,10 @@ src/CMakeFiles/logdb.dir/build: src/liblogdb.so
 .PHONY : src/CMakeFiles/logdb.dir/build
 
 src/CMakeFiles/logdb.dir/requires: src/CMakeFiles/logdb.dir/appender.cpp.o.requires
+src/CMakeFiles/logdb.dir/requires: src/CMakeFiles/logdb.dir/helper.cpp.o.requires
 src/CMakeFiles/logdb.dir/requires: src/CMakeFiles/logdb.dir/layout.cpp.o.requires
 src/CMakeFiles/logdb.dir/requires: src/CMakeFiles/logdb.dir/log.cpp.o.requires
+src/CMakeFiles/logdb.dir/requires: src/CMakeFiles/logdb.dir/loggingevent.cpp.o.requires
 
 .PHONY : src/CMakeFiles/logdb.dir/requires
 

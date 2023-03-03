@@ -8,7 +8,11 @@ src/CMakeFiles/logdb.dir/appender.cpp.o
  ../include/log.h
  ../include/loggingevent.h
  /home/shichen/ssd/opensource/logdb/src/appender.cpp
+src/CMakeFiles/logdb.dir/helper.cpp.o
+ ../include/helper.h
+ /home/shichen/ssd/opensource/logdb/src/helper.cpp
 src/CMakeFiles/logdb.dir/layout.cpp.o
+ ../include/helper.h
  ../include/layout.h
  ../include/loggingevent.h
  /home/shichen/ssd/opensource/logdb/src/layout.cpp
@@ -19,3 +23,6 @@ src/CMakeFiles/logdb.dir/log.cpp.o
  ../include/log.h
  ../include/loggingevent.h
  /home/shichen/ssd/opensource/logdb/src/log.cpp
+src/CMakeFiles/logdb.dir/loggingevent.cpp.o
+ ../include/loggingevent.h
+ /home/shichen/ssd/opensource/logdb/src/loggingevent.cpp

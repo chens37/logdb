@@ -52,6 +52,7 @@ void ConsoleAppender::append(LoggingEvent_t *ev)
 {
     std::ostream& stream = std::cout;
     layout->formatAndAppend(stream, ev);
+    InternalEventManager::doClearEv(ev);
 }
 
 }
