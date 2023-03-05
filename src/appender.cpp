@@ -28,6 +28,7 @@ string Appender::getName()
 void Appender::setLayout(LayoutPtr newLayout)
 {
     layout = newLayout;
+    printf("setlayout %p %p ", this, &layout);
 }
 
 LayoutPtr Appender::getLayout()
@@ -51,6 +52,7 @@ void ConsoleAppender::doAppend(LoggingEvent_t *ev)
 void ConsoleAppender::append(LoggingEvent_t *ev)
 {
     std::ostream& stream = std::cout;
+    printf("append %p %p ",this, &layout);
     layout->formatAndAppend(stream, ev);
     InternalEventManager::doClearEv(ev);
 }

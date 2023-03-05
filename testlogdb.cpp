@@ -5,6 +5,18 @@
 
 using namespace logdb;
 
+void layoutTest()
+{
+    string patternStr = "%d{%H:%M:%S} [%p] %n %m";
+    Logger *pTestLogger = Logger::getInstance();
+    Appender *appender = new ConsoleAppender;
+    appender->setLayout(new PatternLayout(patternStr));
+    pTestLogger->addAppender(appender);
+
+    pTestLogger->log(INFO, "hello test layout");
+
+}
+
 int main(int argc, char** argv)
 {
     Logger *pLogger = Logger::getInstance();
@@ -18,7 +30,7 @@ int main(int argc, char** argv)
     pLogger->setLogLevel(DEBUG);
     pLogger->log(DEBUG, "hello world");
 
-
+    layoutTest();
     return 0;
 }
 

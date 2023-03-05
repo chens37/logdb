@@ -14,6 +14,19 @@ using std::string;
 
 class PatternConverter;
 
+
+struct FormatInfo
+{
+    int maxlen;
+    int minlen;
+    bool leftAlign;
+    bool truncStart;
+    
+    FormatInfo(){ reset(); }
+    void reset();
+};
+
+
 /*
 * This class is used to layout strings sent to an Appender 
 */
@@ -75,14 +88,24 @@ private:
 class PatternParser
 {
 public:
-    static PatternParser* getInstance();
-    PatternListType parse(string pattern_);
-private:
-    PatternParser(){}
+    enum STATE {
+        LITERAL_STATE,
+        CONVERT_STATE,
+        DOT_STATE,
+        MINC_STATE,
+        MAXC_STATE
+    };
+    PatternParser(string &pattern_);
     ~PatternParser(){}
-
-    static PatternParser *m_pInstance;
-
+    PatternListType parse();
+    void finalParse(char c);
+private:
+    size_t pos;
+    STATE state;
+    string pattern;
+    string currentLiteral;
+    FormatInfo formatInfo;
+    PatternListType list;
 };
 
 /* 
@@ -91,11 +114,18 @@ private:
 class PatternConverter
 {
 public:
-    PatternConverter(){}
+    PatternConverter(const FormatInfo& fmtInfo_);
     ~PatternConverter(){}
     void formatAndAppend(std::ostream &, LoggingEvent_t *ev);
+
 protected:
     virtual void convert(string &s, LoggingEvent_t *ev) = 0;
+
+private:
+    int maxlen;
+    int minlen;
+    bool leftAlign;
+    bool truncStart;
 };
 
 /* 
@@ -104,10 +134,10 @@ protected:
 class LiteralPatternConverter:public PatternConverter
 {
 public:
-    LiteralPatternConverter(string &s):str(s){}
+    LiteralPatternConverter(string& s):str(s),PatternConverter(FormatInfo()){}
     ~LiteralPatternConverter();
 protected:
-    virtual void convert(string &s, LoggingEvent_t *ev);
+    virtual void convert(string& s, LoggingEvent_t *ev);
     string str;
 };
 
@@ -128,7 +158,7 @@ public:
         LOGLEVEL_CONVERTER,
 
     };
-    BasicPatternConverter(Type tp):type(tp){}
+    BasicPatternConverter(Type tp, FormatInfo& fmtInfo_);
     ~BasicPatternConverter();
 protected:
     virtual void convert(string &s, LoggingEvent_t *ev);
@@ -143,7 +173,7 @@ protected:
 class DatePatternConverter:public PatternConverter
 {
 public:
-    DatePatternConverter(string& fmt):format(fmt){}
+    DatePatternConverter(string& fmt, FormatInfo& i):format(fmt),PatternConverter(i){}
     ~DatePatternConverter();
 protected:
     virtual void convert(string& s, LoggingEvent_t *ev);

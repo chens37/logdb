@@ -12,6 +12,13 @@ static const string INFOSTRING("INFO");
 static const string WARNINGSTRING("WARNING");
 static const string ERRORSTRING("ERROR");
 
+void FormatInfo::reset()
+{
+    maxlen = __INT_MAX__;
+    minlen = 0;
+    leftAlign = false;
+    truncStart = true;
+}
 
 void SampleLayout::formatAndAppend(std::ostream &stream, LoggingEvent_t *ev)
 {
@@ -44,9 +51,6 @@ const string& Layout::level2Str(const LogLevel ll)
 PatternLayout::PatternLayout(string &newPattern)
 :pattern(newPattern)
 {
-    
-    parsedPatternList = PatternParser::getInstance()->parse(pattern);
-
     //TODO check parsedPatternList empty
 }
 
@@ -58,27 +62,232 @@ void PatternLayout::formatAndAppend(std::ostream &stream, LoggingEvent_t *ev)
         ptr->formatAndAppend(stream, ev); 
 }
 
-PatternParser* PatternParser::m_pInstance = nullptr;
-
-PatternParser* PatternParser::getInstance()
+PatternParser::PatternParser(string& pattern_)
+:pos(0),state(LITERAL_STATE),pattern(pattern_)
 {
-    if(!m_pInstance)
-        m_pInstance = new PatternParser;
 
-    return m_pInstance;
 }
 
-PatternListType PatternParser::parse(string pattern_)
+PatternListType PatternParser::parse()
 {
-    //TODO
+    char c;
+    while (pos < pattern.length())
+    {
+        c = pattern[pos++];
+        switch (state) {
+        case LITERAL_STATE:
+            if (pos == pattern.length())
+            {
+                currentLiteral += c;
+                continue;
+            }
+            
+            switch (pattern[pos])
+            {
+            case '%':
+                currentLiteral += c;
+                pos++;
+                break;
+            default:
+                if (!currentLiteral.empty())
+                {
+                    list.push_back(std::unique_ptr<PatternConverter>(
+                        new LiteralPatternConverter(currentLiteral)));
+                }
+                currentLiteral.resize(0);
+                formatInfo.reset();
+                currentLiteral += c;
+                state = CONVERT_STATE;
+                break;
+            }
+            break;
+        case CONVERT_STATE:
+            currentLiteral += c;
+            if (c == '-')
+                formatInfo.leftAlign = true;
+            else if (c >= '0' && c <= '9')
+            {
+                formatInfo.minlen = c - '0';
+                state = MINC_STATE;
+            }else if (c == '.')
+            {
+                state = DOT_STATE;
+            }else
+                finalParse(c);
+            break;
+        case DOT_STATE:
+            currentLiteral += c;
+            if (c >= '0' && c <= '9')
+            {
+                formatInfo.maxlen = c - '0';
+                state = MAXC_STATE;
+            }
+            else if (c == '-') {
+                formatInfo.truncStart = false;
+            }else {
+                //TODO error print;
+                finalParse(c);
+            }
+            break;
+        case MINC_STATE:
+            currentLiteral += c;
+            if (c >= '0' && c <= '9')
+                formatInfo.minlen = formatInfo.minlen*10 + c-'0';
+            else if (c == '.')
+                state = DOT_STATE;
+            else {           
+                finalParse(c);
+            }
+            break;
+        case MAXC_STATE:
+            currentLiteral += c;
+            if (c >= '0' && c <= '9')
+                formatInfo.maxlen = formatInfo.maxlen*10 + c-'0';
+            else {
+                finalParse(c);
+            }
+            break;
+        default:
+            break;
+        }
+    }
+
+    if (!currentLiteral.empty())
+    {
+        list.push_back(
+            std::unique_ptr<PatternConverter>(
+                new LiteralPatternConverter(currentLiteral)));
+    }
+
+    return std::move(list);
 }
 
-void PatternConverter::formatAndAppend(std::ostream &stream, LoggingEvent_t *ev)
+void PatternParser::finalParse(char c)
+{
+    PatternConverter* pc = nullptr;
+
+    switch (c)
+    {
+    case 'b': 
+        /* filename and path name */
+        pc = new BasicPatternConverter(
+            BasicPatternConverter::FILE_CONVERTER, formatInfo);
+        break;
+    case 'c':
+        /* logger name */
+        break;
+    case 'd':
+    case 'D':
+    {
+        /* date */
+        string fmt;
+        size_t end;
+        if (pattern[pos] == '{')
+        {
+            end = pattern.find_first_of('}', pos);
+            if (end != string::npos)
+            {
+                fmt = pattern.substr(pos+1, end-pos-1);
+                pos = end+1;
+            } else
+            {
+                // TODO print error
+                pos = pattern.length();
+                break;
+            }
+        }else 
+            fmt = "%y/%m/%d %H:%M:%S";
+        pc = new DatePatternConverter(fmt, formatInfo);
+    }
+        break;
+    case 'E':
+        /* environment */
+        break;
+    case 'F':
+        /* filename */
+        pc = new BasicPatternConverter(
+            BasicPatternConverter::FILE_CONVERTER, formatInfo);
+        break;
+    case 'm':
+        /* message */
+        pc = new BasicPatternConverter(
+            BasicPatternConverter::MESSAGE_CONVERTER, formatInfo);
+        break;
+    case 'p':
+        /* loglevel */
+        pc = new BasicPatternConverter(
+            BasicPatternConverter::LOGLEVEL_CONVERTER, formatInfo);
+        break;
+    case 'n':
+        /* line */
+        pc = new BasicPatternConverter(
+            BasicPatternConverter::LINE_CONVERTER, formatInfo);
+        break;
+    case 'r':
+        /* seconds */
+        break;
+    case 't':
+        /* thread id */
+        pc = new BasicPatternConverter(
+            BasicPatternConverter::THREAD_CONVERTER, formatInfo);
+        break;
+    case 'T':
+        /* thread name */
+        break;
+    case 'i':
+        /* pid */
+        break;
+    default:
+        if (!currentLiteral.empty())
+            pc = new LiteralPatternConverter(currentLiteral);
+        
+        // TODO error print
+        break;
+    }
+
+    if (pc)
+        list.push_back(std::unique_ptr<PatternConverter>(pc));
+    state = LITERAL_STATE;
+    currentLiteral.resize(0);
+    formatInfo.reset();
+}
+
+PatternConverter::PatternConverter(const FormatInfo& fmtInfo_)
+{
+    maxlen = fmtInfo_.maxlen;
+    minlen = fmtInfo_.minlen;
+    leftAlign = fmtInfo_.leftAlign;
+    truncStart = fmtInfo_.truncStart;
+}
+
+void PatternConverter::formatAndAppend(std::ostream &output, LoggingEvent_t *ev)
 {
     string s;
     convert(s, ev);
+    int len = static_cast<int>(s.length());
 
-    stream << s;
+    if (len > maxlen) 
+    {
+        if (truncStart)
+        {
+            output << s.substr(len - maxlen);
+        } else 
+            output << s.substr(0, maxlen);
+    }
+    else if (len < minlen)
+    {
+        int pad = minlen - len;
+        if (leftAlign)
+        {
+            output << s;
+            output << string(pad, ' ');
+        } else {
+            output << string(pad, ' ');
+            output << s;
+        }
+    }
+    else
+        output << s;
 }
 
 void LiteralPatternConverter::convert(string &s, LoggingEvent_t *ev)
@@ -89,6 +298,11 @@ void LiteralPatternConverter::convert(string &s, LoggingEvent_t *ev)
 void DatePatternConverter::convert(string &s, LoggingEvent_t *ev)
 {
     s = helper::getFormatTime(format, ev->rawtime);
+}
+
+BasicPatternConverter::BasicPatternConverter(Type tp, FormatInfo& fmtInfo_)
+:type(tp),PatternConverter(fmtInfo_)
+{
 }
 
 void BasicPatternConverter::convert(string &s, LoggingEvent_t *ev)
