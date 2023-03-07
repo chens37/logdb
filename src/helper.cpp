@@ -17,5 +17,17 @@ string getFormatTime(string& format, time_t rawtime)
     return str;
 }
 
+time_t now()
+{
+    return time(0);
+}
+
+string deletePath(string& fullpath)
+{
+    size_t start = fullpath.find_last_of('/', 0);
+    
+    return fullpath.substr(start+1);
+}
+
   }//namespace helper
 } //namespace logdb

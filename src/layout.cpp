@@ -51,7 +51,11 @@ const string& Layout::level2Str(const LogLevel ll)
 PatternLayout::PatternLayout(string &newPattern)
 :pattern(newPattern)
 {
-    //TODO check parsedPatternList empty
+    parsedPatternList = PatternParser(pattern).parse();
+    if (parsedPatternList.empty())
+    {
+        printf("parsedPatternList empty");
+    }   
 }
 
 PatternLayout::~PatternLayout() = default;
@@ -59,7 +63,8 @@ PatternLayout::~PatternLayout() = default;
 void PatternLayout::formatAndAppend(std::ostream &stream, LoggingEvent_t *ev)
 {
     for(auto & ptr : parsedPatternList)
-        ptr->formatAndAppend(stream, ev); 
+        ptr->formatAndAppend(stream, ev);
+    
 }
 
 PatternParser::PatternParser(string& pattern_)
@@ -81,24 +86,29 @@ PatternListType PatternParser::parse()
                 currentLiteral += c;
                 continue;
             }
-            
-            switch (pattern[pos])
+            if (c == '%') 
             {
-            case '%':
-                currentLiteral += c;
-                pos++;
-                break;
-            default:
-                if (!currentLiteral.empty())
+                switch (pattern[pos]) 
                 {
-                    list.push_back(std::unique_ptr<PatternConverter>(
-                        new LiteralPatternConverter(currentLiteral)));
+                case '%':
+                    currentLiteral += c;
+                    pos++;
+                    break;
+                default:
+                    if (!currentLiteral.empty())
+                    {
+                        list.push_back(std::unique_ptr<PatternConverter>(
+                            new LiteralPatternConverter(currentLiteral)));
+                    }
+                    currentLiteral.resize(0);
+                    formatInfo.reset();
+                    currentLiteral += c;
+                    state = CONVERT_STATE;
+                    break;
                 }
-                currentLiteral.resize(0);
-                formatInfo.reset();
-                currentLiteral += c;
-                state = CONVERT_STATE;
-                break;
+            } else 
+            {
+              currentLiteral += c;  
             }
             break;
         case CONVERT_STATE:
@@ -169,9 +179,9 @@ void PatternParser::finalParse(char c)
     switch (c)
     {
     case 'b': 
-        /* filename and path name */
+        /* func */
         pc = new BasicPatternConverter(
-            BasicPatternConverter::FILE_CONVERTER, formatInfo);
+            BasicPatternConverter::FUNC_CONVERTER, formatInfo);
         break;
     case 'c':
         /* logger name */
@@ -300,7 +310,7 @@ void DatePatternConverter::convert(string &s, LoggingEvent_t *ev)
     s = helper::getFormatTime(format, ev->rawtime);
 }
 
-BasicPatternConverter::BasicPatternConverter(Type tp, FormatInfo& fmtInfo_)
+BasicPatternConverter::BasicPatternConverter    (Type tp, FormatInfo& fmtInfo_)
 :type(tp),PatternConverter(fmtInfo_)
 {
 }
@@ -311,10 +321,10 @@ void BasicPatternConverter::convert(string &s, LoggingEvent_t *ev)
     {
     case FILE_CONVERTER:
         /* code */
-        s = ev->file;
+        s = helper::deletePath(ev->file);
         break;
     case LINE_CONVERTER:
-        s = ev->line;
+        s = std::to_string(ev->line);
         break;
     case FUNC_CONVERTER:
         s = ev->func;

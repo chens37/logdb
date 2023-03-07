@@ -7,13 +7,15 @@ using namespace logdb;
 
 void layoutTest()
 {
-    string patternStr = "%d{%H:%M:%S} [%p] %n %m";
+    string patternStr = "%d{%y/%m/%d %H:%M:%S} %b:%n [%p] %m";
     Logger *pTestLogger = Logger::getInstance();
     Appender *appender = new ConsoleAppender;
     appender->setLayout(new PatternLayout(patternStr));
     pTestLogger->addAppender(appender);
 
-    pTestLogger->log(INFO, "hello test layout");
+    pTestLogger->log(INFO, "hello test layout\n" );
+    pTestLogger->log(ERROR, "hello test layout 2\n");
+    pTestLogger->log(INFO, "hello test layout 3\n");
 
 }
 

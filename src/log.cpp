@@ -4,6 +4,7 @@
 #include <time.h>
 #include <string>
 #include <algorithm>
+#include "helper.h"
 
 namespace logdb {
 
@@ -24,9 +25,10 @@ void Logger::forcedLog(LogLevel ll, string str,
     ev->line = line;
     ev->ll = ll;
     ev->msg = str;
+    ev->rawtime = helper::now();
 
     callAppend(ev);
-
+    evManager->clearEv(ev);
 }
 
 Logger::~Logger(){

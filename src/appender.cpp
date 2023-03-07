@@ -28,12 +28,16 @@ string Appender::getName()
 void Appender::setLayout(LayoutPtr newLayout)
 {
     layout = newLayout;
-    printf("setlayout %p %p ", this, &layout);
 }
 
 LayoutPtr Appender::getLayout()
 {
     return layout;
+}
+
+void formatEvent(string& str, LoggingEvent_t *ev)
+{
+    
 }
 
 ConsoleAppender::ConsoleAppender(/* args */)
@@ -52,9 +56,32 @@ void ConsoleAppender::doAppend(LoggingEvent_t *ev)
 void ConsoleAppender::append(LoggingEvent_t *ev)
 {
     std::ostream& stream = std::cout;
-    printf("append %p %p ",this, &layout);
     layout->formatAndAppend(stream, ev);
-    InternalEventManager::doClearEv(ev);
+   // InternalEventManager::doClearEv(ev);
+}
+
+FileAppender::FileAppender(string fileWithPath,
+                            std::ios_base::openmode mode,
+                            size_t maxsize)
+:maxSize(maxsize), fileMode(mode),fileName(fileWithPath)
+{
+    init();
+}
+
+void FileAppender::init()
+{
+    out.open(fileName, fileMode);
+}
+
+void FileAppender::deinit()
+{
+    out.close();
+}
+
+void FileAppender::append(LoggingEvent_t *ev)
+{
+    layout->formatAndAppend(out, ev);
+    
 }
 
 }

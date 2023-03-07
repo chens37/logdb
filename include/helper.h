@@ -11,7 +11,8 @@ namespace helper{
 using std::string;
 
 string getFormatTime(string &format, time_t rawtime);
-
+time_t now();
+string deletePath(string& fullpath);
 
 } //namespace helper
 } //namespace logdb
