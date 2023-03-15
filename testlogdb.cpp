@@ -1,5 +1,5 @@
 #include <iostream>
-
+#include <unistd.h>
 #include "log.h"
 #include "layout.h"
 
@@ -17,6 +17,13 @@ void layoutTest()
     pTestLogger->log(ERROR, "hello test layout 2\n");
     pTestLogger->log(INFO, "hello test layout 3\n");
 
+    Appender *pfAppender = new FileAppender("flog.txt");
+    pfAppender->setLayout(new PatternLayout(patternStr));
+    pTestLogger->addAppender(pfAppender);
+
+    pTestLogger->log(INFO, "hello test file Appender\n");
+
+
 }
 
 int main(int argc, char** argv)
@@ -33,6 +40,8 @@ int main(int argc, char** argv)
     pLogger->log(DEBUG, "hello world");
 
     layoutTest();
+    sleep(1);
+
     return 0;
 }
 

@@ -56,6 +56,7 @@ public:
     ~FileAppender();
     void init();
     void deinit();
+    virtual void doAppend(LoggingEvent_t *ev);
 private:
     void open();
     void append(LoggingEvent_t *ev);

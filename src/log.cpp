@@ -5,6 +5,7 @@
 #include <string>
 #include <algorithm>
 #include "helper.h"
+#include "loglog.h"
 
 namespace logdb {
 
@@ -107,6 +108,7 @@ void Logger::removeAppender(string& name)
 void Logger::callAppend(LoggingEvent_t *ev)
 {
     //TODO
+    LOGLOG_INFO("Append");
     for ( AppenderPtr& ptr : appenderList ) {
         ptr->doAppend(ev);
     }

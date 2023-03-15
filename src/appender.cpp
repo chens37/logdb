@@ -68,6 +68,11 @@ FileAppender::FileAppender(string fileWithPath,
     init();
 }
 
+FileAppender::~FileAppender()
+{
+    deinit();
+}
+
 void FileAppender::init()
 {
     out.open(fileName, fileMode);
@@ -78,10 +83,17 @@ void FileAppender::deinit()
     out.close();
 }
 
+void FileAppender::doAppend(LoggingEvent_t *ev)
+{
+    append(ev);
+}
+
 void FileAppender::append(LoggingEvent_t *ev)
 {
     layout->formatAndAppend(out, ev);
-    
+    out.flush();
 }
+
+
 
 }
